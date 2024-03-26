@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fragmentMenu"
+        android:enabled="true"
+        android:icon="@drawable/ic_menu"
+        android:title="Меню" />
+    <item
+        android:id="@+id/fragmentProfile"
+        android:enabled="true"
+        android:icon="@drawable/ic_profile"
+        android:title="Профиль" />
+    <item
+        android:id="@+id/fragmentCart"
+        android:enabled="true"
+        android:icon="@drawable/ic_cart"
+        android:title="Корзина" />
+</menu>
