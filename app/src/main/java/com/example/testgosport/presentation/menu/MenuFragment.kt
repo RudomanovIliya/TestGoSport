@@ -45,37 +45,40 @@ class MenuFragment : BaseFragment(R.layout.fragment_menu) {
             viewModel.loadCategories()
         } else {
             var categorySaveString = ""
-            val fileCategory = File(context?.filesDir, filenameCategory)
-            categorySaveString = fileCategory.readText()
-            var categories = categorySaveString.split("\\s+".toRegex())
-            categories=categories.dropLast(1)
-            categories.forEach { category ->
-                categoryListSave.add(CategoryInfo(category))
-            }
-            categoriesAdapter.setList(categoryListSave)
 
-            var mealSaveString = ""
-            val fileMeal = File(context?.filesDir, filenameMeal)
-            mealSaveString = fileMeal.readText()
-            val meals = mealSaveString.split(",").toList()
-            var i = 0
-            while (i < meals.size - 7) {
-                mealListSave.add(
-                    Meal(
-                        meals[i],
-                        meals[i + 1],
-                        meals[i + 2],
-                        meals[i + 3],
-                        meals[i + 4],
-                        meals[i + 5],
-                        meals[i + 6],
-                        meals[i + 7]
+            val fileCategory = File(context?.filesDir, filenameCategory)
+            if (fileCategory.exists()) {
+                categorySaveString = fileCategory.readText()
+                var categories = categorySaveString.split("\\s+".toRegex())
+                categories = categories.dropLast(1)
+                categories.forEach { category ->
+                    categoryListSave.add(CategoryInfo(category))
+                }
+                categoriesAdapter.setList(categoryListSave)
+
+                var mealSaveString = ""
+                val fileMeal = File(context?.filesDir, filenameMeal)
+                mealSaveString = fileMeal.readText()
+                val meals = mealSaveString.split(",").toList()
+                var i = 0
+                while (i < meals.size - 7) {
+                    mealListSave.add(
+                        Meal(
+                            meals[i],
+                            meals[i + 1],
+                            meals[i + 2],
+                            meals[i + 3],
+                            meals[i + 4],
+                            meals[i + 5],
+                            meals[i + 6],
+                            meals[i + 7]
+                        )
                     )
-                )
-                i += 8
+                    i += 8
+                }
+                mealsAdapter.setList(mealListSave)
+                mealList.addAll(mealListSave)
             }
-            mealsAdapter.setList(mealListSave)
-            mealList.addAll(mealListSave)
         }
         binding.recycleViewAdd.adapter = addsAdapter
         binding.recycleViewMeals.adapter = mealsAdapter.apply {
